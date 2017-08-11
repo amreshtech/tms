@@ -1,0 +1,23 @@
+.login-card {
+    background: transparent;
+    border: none;
+    width: 40%;
+    height: 40%;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    position: absolute;
+}
+
+.form-group label {
+    font-size: 25px;
+    color: white;
+    font-family: 'Comfortaa', cursive, sans-serif;
+}
+
+.form-group input {
+    font-family: 'Montserrat', cursive, sans-serif;
+    font-size: 20px;
+}

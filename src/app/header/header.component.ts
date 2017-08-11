@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  menuItems: Array<String> = [];
 
-  constructor() { }
+  constructor() {
+    this.menuItems.push('create task');
+    this.menuItems.push('all tasks');
+   }
 
   ngOnInit() {
   }

@@ -1,0 +1,15 @@
+<div class="login-card">
+
+    <form action="" method="POST" role="form" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter your username" pInputText [formControl]="loginForm.controls['username']">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" pPassword placeholder="Enter your password" />
+        </div>
+        <button type="submit" class="btn btn-warning pull-right" pButton>Submit</button>
+    </form>
+
+</div>
