@@ -1,9 +1,16 @@
 <div class="ui link cards">
+    <div class="card" (click)="createTask();">
+        <div class="content">
+            <div class="description">
+                <span class="glyphicon glyphicon-plus"></span>
+            </div>
+        </div>
+    </div>
     <div class="card" *ngFor="let task of tasks">
         <div class="content">
-            <div class="header">{{task.name}}</div>
+            <div class="header">{{task.name | uppercase }}</div>
             <div class="meta">
-                <a>{{task.date}}</a>
+                Created On: <a>{{task.createdDate}}</a> by <b>{{task.assignedBy}}</b>
             </div>
             <div class="description">
                 {{task.description}}
@@ -11,12 +18,21 @@
         </div>
         <div class="extra content">
             <span class="right floated">
-        Joined in 2013
+        Deadline: <b>{{task.deadline}}</b>
       </span>
             <span>
         <i class="user icon"></i>
-        75 Friends
+        To: <b>{{task.assignedTo}}</b>
       </span>
         </div>
+    </div>
+</div>
+
+<div class="ui basic modal">
+    <div class="ui icon header">
+        Create New Task
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
     </div>
 </div>

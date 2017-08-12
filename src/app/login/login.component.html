@@ -2,15 +2,15 @@
     <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" *ngIf="!loginService.getUser()">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter your username" pInputText [formControl]="username">
+            <input type="text" class="form-control" id="username" placeholder="Enter your username" [formControl]="username">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" pPassword placeholder="Enter your password" [formControl]="password" />
+            <input type="password" class="form-control" id="password" placeholder="Enter your password" [formControl]="password" />
             <div *ngIf="password.hasError('minlength') && username.dirty" class="ui negative message">Password is less than 8 characters</div>
             <div *ngIf="message" class="ui negative message">{{ message }}</div>
         </div>
-        <button type="submit" class="btn btn-warning pull-right" pButton [disabled]="!loginForm.valid">Submit</button>
+        <button type="submit" class="btn btn-warning pull-right" [disabled]="!loginForm.valid">Submit</button>
     </form>
 </div>
 

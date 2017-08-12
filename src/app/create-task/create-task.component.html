@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <form [formGroup]="createTaskForm" (ngSubmit)="createTask(createTaskForm.value)">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                <div class="form-group">
+                    <label for="name">Task Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter the Task Name" [formControl]="name">
+                </div>
+                <div class="form-group">
+                    <label for="createdDate">Created On</label>
+                    <input type="text" class="form-control" id="createdDate" placeholder="Enter the Task Name" [formControl]="createdDate">
+                </div>
+                <div class="form-group">
+                    <label for="assignedBy">Assigned By</label>
+                    <input type="text" class="form-control" id="assignedBy" placeholder="Enter the Task Name" [formControl]="assignedBy">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                <div class="form-group">
+                    <label for="assignedTo">Assigned To</label>
+                    <input type="text" class="form-control" id="assignedTo" placeholder="Enter the Task Name" [formControl]="assignedTo">
+                </div>
+                <div class="form-group">
+                    <label for="description">Task Description</label>
+                    <input type="text" class="form-control" id="description" placeholder="Enter the Task Name" [formControl]="description">
+                </div>
+                <div class="form-group">
+                    <label for="deadline">Task Description</label>
+                    <input type="text" class="form-control" id="deadline" placeholder="Enter the Task Name" [formControl]="deadline">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="ui red basic cancel inverted button pull-right" (click)="clearForm()">
+                <i class="remove icon"></i> Cancel
+            </button>
+            <button class="ui green ok inverted button pull-right" [disabled]="!createTaskForm.valid">
+            <i class="checkmark icon"></i> Create
+        </button>
+        </div>
+    </form>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-home',
@@ -7,12 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   tasks: Array<object> = [];
-  constructor() {
-    this.tasks.push({'name': 'task1', 'date': '28-jan-2017', 'assigned-by': 'Amresh', 'assigned-to': 'Paresh'});
-    this.tasks.push({'name': 'task2', 'date': '8-feb-2017', 'assigned-by': 'Paresh', 'assigned-to': 'Amresh'});
+  constructor(private router: Router) {
+    this.tasks.push({
+      'name': 'task1',
+      'createdDate': '28-Jan-2017',
+      'assignedBy': 'Amresh',
+      'assignedTo': 'Paresh',
+      'description': 'Implement Semantic UI',
+      'deadline': '19-Feb-2017'
+    });
+    this.tasks.push({
+      'name': 'task2',
+      'createdDate': '8-Feb-2017',
+      'assignedBy': 'Paresh',
+      'assignedTo': 'Amresh',
+      'description': 'Implement Spring Boot',
+      'deadline': '30-Mar-2017'
+    });
    }
 
   ngOnInit() {
+  }
+
+  createTask(): boolean {
+    $('.ui.basic.modal').modal('show');
+    this.router.navigateByUrl('');
+    return false;
   }
 
 }
