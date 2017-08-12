@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 declare var $: any;
 
@@ -31,10 +31,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  createTask(): boolean {
+  showModal(): boolean {
     $('.ui.basic.modal').modal('show');
-    this.router.navigateByUrl('');
     return false;
   }
-
 }

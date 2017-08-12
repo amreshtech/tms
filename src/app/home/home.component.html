@@ -1,5 +1,5 @@
 <div class="ui link cards">
-    <div class="card" (click)="createTask();">
+    <div class="card" (click)="showModal();">
         <div class="content">
             <div class="description">
                 <span class="glyphicon glyphicon-plus"></span>
@@ -33,6 +33,6 @@
         Create New Task
     </div>
     <div class="content">
-        <router-outlet></router-outlet>
+        <app-create-task [tasks]="tasks"></app-create-task>
     </div>
 </div>

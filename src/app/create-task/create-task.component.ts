@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-create-task',
@@ -15,7 +17,9 @@ export class CreateTaskComponent implements OnInit {
   description: AbstractControl;
   deadline: AbstractControl;
 
-  constructor(private fb: FormBuilder) {
+  @Input() tasks: Array<object>;
+
+  constructor(private fb: FormBuilder, private router: Router) {
     this.createTaskForm = fb.group({
       'name': ['', Validators.required],
       'createdDate': ['', Validators.required],
@@ -34,10 +38,14 @@ export class CreateTaskComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.createTaskForm.reset();
   }
 
   clearForm(): boolean {
+    this.createTaskForm.reset();
+    return false;
+  }
+  createTask(value: any): boolean {
+    this.tasks.push(value);
     this.createTaskForm.reset();
     return false;
   }
