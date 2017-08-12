@@ -1,15 +1,20 @@
 <div class="login-card">
-
-    <form action="" method="POST" role="form" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" *ngIf="!loginService.getUser()">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter your username" pInputText [formControl]="loginForm.controls['username']">
+            <input type="text" class="form-control" id="username" placeholder="Enter your username" pInputText [formControl]="username">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" pPassword placeholder="Enter your password" />
+            <input type="password" class="form-control" id="password" pPassword placeholder="Enter your password" [formControl]="password" />
+            <div *ngIf="password.hasError('minlength') && username.dirty" class="ui negative message">Password is less than 8 characters</div>
+            <div *ngIf="message" class="ui negative message">{{ message }}</div>
         </div>
-        <button type="submit" class="btn btn-warning pull-right" pButton>Submit</button>
+        <button type="submit" class="btn btn-warning pull-right" pButton [disabled]="!loginForm.valid">Submit</button>
     </form>
+</div>
 
+<div class="well" *ngIf="loginService.getUser()">
+    Logged in as <b> {{ loginService.getUser() }} </b>
+    <a (click)="logout()">Logout</a>
 </div>

@@ -1,0 +1,22 @@
+<div class="ui link cards">
+    <div class="card" *ngFor="let task of tasks">
+        <div class="content">
+            <div class="header">{{task.name}}</div>
+            <div class="meta">
+                <a>{{task.date}}</a>
+            </div>
+            <div class="description">
+                {{task.description}}
+            </div>
+        </div>
+        <div class="extra content">
+            <span class="right floated">
+        Joined in 2013
+      </span>
+            <span>
+        <i class="user icon"></i>
+        75 Friends
+      </span>
+        </div>
+    </div>
+</div>
