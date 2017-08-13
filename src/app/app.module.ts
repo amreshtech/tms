@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginService } from './login/login.service';
 import { LoggedInGuard } from 'app/logged-in.guard';
 import { CreateTaskComponent } from './create-task/create-task.component';
+import { CalendarModule } from 'primeng/primeng';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -31,9 +33,11 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     NgSemanticModule,
     ReactiveFormsModule,
+    CalendarModule,
     RouterModule.forRoot(routes)
   ],
   providers: [LoginService, LoggedInGuard],

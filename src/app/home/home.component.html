@@ -10,7 +10,7 @@
         <div class="content">
             <div class="header">{{task.name | uppercase }}</div>
             <div class="meta">
-                Created On: <a>{{task.createdDate}}</a> by <b>{{task.assignedBy}}</b>
+                Created On: <a>{{task.createdDate | date}}</a> by <b>{{task.assignedBy}}</b>
             </div>
             <div class="description">
                 {{task.description}}
@@ -18,7 +18,7 @@
         </div>
         <div class="extra content">
             <span class="right floated">
-        Deadline: <b>{{task.deadline}}</b>
+        Deadline: <b>{{task.deadline | date}}</b>
       </span>
             <span>
         <i class="user icon"></i>

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-declare var $: any;
+import { CalendarModule } from 'primeng/primeng';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-create-task',
@@ -18,11 +19,13 @@ export class CreateTaskComponent implements OnInit {
   deadline: AbstractControl;
 
   @Input() tasks: Array<object>;
+  deadlineDate: Date;
+  minDate: Date;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder) {
     this.createTaskForm = fb.group({
       'name': ['', Validators.required],
-      'createdDate': ['', Validators.required],
+      'createdDate': [''],
       'assignedBy': ['', Validators.required],
       'assignedTo': ['', Validators.required],
       'description': ['', Validators.required],
@@ -35,7 +38,9 @@ export class CreateTaskComponent implements OnInit {
     this.assignedTo = this.createTaskForm.controls['assignedTo'];
     this.description = this.createTaskForm.controls['description'];
     this.deadline = this.createTaskForm.controls['deadline'];
-   }
+    this.createdDate.setValue(moment());
+    this.minDate = new Date();
+  }
 
   ngOnInit() {
   }
@@ -46,6 +51,7 @@ export class CreateTaskComponent implements OnInit {
   }
   createTask(value: any): boolean {
     this.tasks.push(value);
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
     this.createTaskForm.reset();
     return false;
   }
