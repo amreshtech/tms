@@ -32,3 +32,14 @@
     font-family: 'Montserrat', cursive, sans-serif;
     font-size: 1.2em;
 }
+
+.signup-invite {
+    font-family: 'Montserrat', cursive, sans-serif;
+    color: white;
+    font-size: 1.3em;
+}
+
+.signup-invite>a {
+    color: white;
+    text-decoration: underline;
+}

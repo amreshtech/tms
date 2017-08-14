@@ -3,3 +3,13 @@
     padding-left: 33%;
     color: darkgrey;
 }
+
+.assignedToYou {
+    font-family: 'Montserrat', cursive, sans-serif;
+    color: white;
+    font-size: 3em;
+}
+
+.feed {
+    background-color: white;
+}
