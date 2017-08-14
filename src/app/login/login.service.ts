@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { User } from 'app/users.model';
 
 @Injectable()
 export class LoginService {
   login(user: string, password: string): boolean {
-    if (user === 'amresh' && password === 'mishra123') {
-      localStorage.setItem('username', user);
-      return true;
+    const isExist = this.doesExist(user);
+    if (isExist) {
+      const userDetail = this.getUserDetails(user);
+      if (user === userDetail.username && password === userDetail.password) {
+        localStorage.setItem('username', user);
+        return true;
+      }
     }
     return false;
   }
@@ -20,5 +25,23 @@ export class LoginService {
 
   isLoggedIn(): boolean {
     return this.getUser() !== null;
+  }
+
+  doesExist(user: string): boolean {
+    if (localStorage.getItem('users')) {
+      for (const i of JSON.parse(localStorage.getItem('users'))) {
+        if (i.username === user) {
+          return true;
+        }
+      }
+    } else { return false; }
+  }
+
+  getUserDetails(user: string): User {
+    for (const i of JSON.parse(localStorage.getItem('users'))) {
+      if (i.username === user) {
+        return i;
+      }
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Task } from 'app/tasks.model';
 declare var $: any;
 
 @Component({
@@ -7,7 +8,7 @@ declare var $: any;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  tasks: Array<object> = [];
+  tasks: Array<Task> = [];
 
   constructor() {
     if (!localStorage.getItem('tasks')) {

@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { NgSemanticModule } from 'ng-semantic';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -14,11 +13,16 @@ import { LoggedInGuard } from 'app/logged-in.guard';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { CalendarModule } from 'primeng/primeng';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SignupComponent } from './signup/signup.component';
+import { SignupService } from 'app/signup/signup.service';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard]},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'signup', component: SignupComponent },
+  { path: 'logout', component: LogoutComponent }
 ]
 
 
@@ -29,18 +33,19 @@ const routes: Routes = [
     FooterComponent,
     LoginComponent,
     HomeComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    SignupComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgSemanticModule,
     ReactiveFormsModule,
     CalendarModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [LoginService, LoggedInGuard],
+  providers: [LoginService, LoggedInGuard, SignupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

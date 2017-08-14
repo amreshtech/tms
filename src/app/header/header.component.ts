@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'app/login/login.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   menuItems: Array<String> = [];
+  currentUser: string;
 
-  constructor() {
-    this.menuItems.push('create task');
-    this.menuItems.push('all tasks');
+  constructor(loginService: LoginService) {
+    this.currentUser = loginService.getUser();
    }
 
   ngOnInit() {

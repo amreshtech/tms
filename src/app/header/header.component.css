@@ -1,9 +1,16 @@
-.navbar a {
+.nav>li>a {
     font-size: 20px;
     color: white;
     font-weight: 600px;
 }
 
+.nav>li>a:focus,
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: transparent !important;
+}
+
 .navbar-brand {
     font-size: 30px !important;
+    color: white !important;
 }

@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { CalendarModule } from 'primeng/primeng';
 import * as moment from 'moment';
+import { Task } from 'app/tasks.model';
+import { LoginService } from "app/login/login.service";
+
 
 @Component({
   selector: 'app-create-task',
@@ -18,11 +21,10 @@ export class CreateTaskComponent implements OnInit {
   description: AbstractControl;
   deadline: AbstractControl;
 
-  @Input() tasks: Array<object>;
-  deadlineDate: Date;
+  @Input() tasks: Array<Task>;
   minDate: Date;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, loginService: LoginService) {
     this.createTaskForm = fb.group({
       'name': ['', Validators.required],
       'createdDate': [''],
@@ -39,6 +41,7 @@ export class CreateTaskComponent implements OnInit {
     this.description = this.createTaskForm.controls['description'];
     this.deadline = this.createTaskForm.controls['deadline'];
     this.createdDate.setValue(moment());
+    this.assignedBy.setValue(loginService.getUser());
     this.minDate = new Date();
   }
 
