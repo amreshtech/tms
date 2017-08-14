@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CalendarModule } from 'primeng/primeng';
 import * as moment from 'moment';
 import { Task } from 'app/tasks.model';
-import { LoginService } from "app/login/login.service";
+import { LoginService } from 'app/login/login.service';
 
 
 @Component({
