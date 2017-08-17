@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <h1 class="assignedToYou" *ngIf="assignedToTasks.length > 0">Assigned To You.</h1>
             <h1 class="assignedToYou" *ngIf="assignedToTasks.length == 0">No Task Assigned To You.</h1>
-            <div class="ui link cards">
+            <div class="ui link three cards">
                 <div class="card" *ngFor="let task of assignedToTasks">
                     <div class="content">
                         <div class="header">{{task.name | uppercase }}</div>
@@ -26,9 +26,9 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h1 class="assignedToYou" *ngIf="assignedByTasks  > 0">Assigned By You.</h1>
-            <h1 class="assignedToYou" *ngIf="assignedByTasks == 0">Assign a new task.</h1>
-            <div class="ui link cards">
+            <h1 class="assignedToYou" *ngIf="assignedByTasks.length > 0">Assigned By You.</h1>
+            <h1 class="assignedToYou" *ngIf="assignedByTasks.length == 0">Assign a new task.</h1>
+            <div class="ui link two cards">
                 <div class="card" (click)="showModal();">
                     <div class="content">
                         <div class="description">
@@ -47,12 +47,8 @@
                         </div>
                     </div>
                     <div class="extra content">
-                        <span class="right floated">
-        Deadline: <b>{{task.deadline | date}}</b>
-      </span> <span>
-        <i class="user icon"></i>
-        To: <b style="text-transform:capitalize">{{task.assignedTo}}</b>
-      </span>
+                        <span class="right floated">Deadline: <b>{{task.deadline | date}}</b></span>
+                        <span><i class="user icon"></i>To: <b style="text-transform:capitalize">{{task.assignedTo}}</b></span>
                     </div>
                 </div>
             </div>

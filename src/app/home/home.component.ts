@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { Task } from 'app/tasks.model';
 import { LoginService } from 'app/login/login.service';
 declare var $: any;
@@ -30,10 +30,10 @@ export class HomeComponent implements OnInit {
   filterTasks(): void {
     if (localStorage.getItem('tasks')) {
       for (const i of this.tasks) {
-        if (i.assignedTo === this.currentUser) {
+        if (i.assignedTo.toLowerCase() === this.currentUser) {
           this.assignedToTasks.push(i);
         }
-        if (i.assignedBy === this.currentUser) {
+        if (i.assignedBy.toLowerCase() === this.currentUser) {
           this.assignedByTasks.push(i);
         }
       }
