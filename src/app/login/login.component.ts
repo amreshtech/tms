@@ -34,10 +34,11 @@ export class LoginComponent implements OnInit {
 
   login({ username, password }: { username: string, password: string }): boolean {
     this.message = '';
-    if (!this.loginService.login(username, password)) {
-      this.message = 'Invalid Credentials';
-    }
-    this.router.navigateByUrl(this.returnUrl);
+    this.loginService.login(username, password).subscribe(res => {
+        localStorage.setItem('username', username);
+        this.router.navigateByUrl(this.returnUrl);
+      }, err => {this.message = 'Invalid Credentials';}
+    );
     return false;
   }
 

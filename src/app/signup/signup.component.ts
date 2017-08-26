@@ -32,13 +32,9 @@ export class SignupComponent implements OnInit {
   }
 
   signup({ username, password }: { username: string, password: string }): boolean {
-    this.message = '';
-
-    if (!this.signupService.signup(username, password)) {
-      alert('User already exists.Please login.');
-    } else {
+    this.signupService.signup(username, password).subscribe(res => {
       alert('You have been registered.Please login.');
-    }
+    }, err => {alert('User already exists.Please login.'); });
     this.router.navigateByUrl('/login');
     return false;
   }

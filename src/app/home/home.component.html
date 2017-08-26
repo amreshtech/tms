@@ -8,7 +8,7 @@
                     <div class="content">
                         <div class="header">{{task.name | uppercase }}</div>
                         <div class="meta">
-                            Created On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedBy}}</b>
+                            Created On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedBy.username}}</b>
                         </div>
                         <div class="description">
                             {{task.description}}
@@ -19,7 +19,7 @@
         Deadline: <b>{{task.deadline | date}}</b>
       </span> <span>
         <i class="user icon"></i>
-        To: <b style="text-transform:capitalize">{{task.assignedTo}}</b>
+        To: <b style="text-transform:capitalize">{{task.assignedTo.username}}</b>
       </span>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                     <div class="content">
                         <div class="header">{{task.name | uppercase }}</div>
                         <div class="meta">
-                            Created On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedBy}}</b>
+                            Created On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedBy.username}}</b>
                         </div>
                         <div class="description">
                             {{task.description}}
@@ -48,7 +48,7 @@
                     </div>
                     <div class="extra content">
                         <span class="right floated">Deadline: <b>{{task.deadline | date}}</b></span>
-                        <span><i class="user icon"></i>To: <b style="text-transform:capitalize">{{task.assignedTo}}</b></span>
+                        <span><i class="user icon"></i>To: <b style="text-transform:capitalize">{{task.assignedTo.username}}</b></span>
                     </div>
                 </div>
             </div>

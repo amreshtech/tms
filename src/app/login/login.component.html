@@ -13,10 +13,10 @@
         </div>
         <button type="submit" class="btn btn-warning pull-right" [disabled]="!loginForm.valid">Login</button>
     </form>
-    <h4 class="signup-invite">Not Registered ? Sign Up <a [routerLink]="signup">here</a>&nbsp;.</h4>
+    <h4 class="signup-invite">Not Registered ? Sign Up <a [routerLink]="['/signup']">here</a>&nbsp;.</h4>
 </div>
 
 <div class="well" *ngIf="loginService.getUser()">
     Logged in as <b> {{ loginService.getUser() | uppercase }} </b>
-    <br>Go to<a [routerLink]="home"> Home</a>
+    <br>Go to<a [routerLink]="['/home']"> Home</a>
 </div>

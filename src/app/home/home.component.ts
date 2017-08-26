@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { Task } from 'app/tasks.model';
 import { LoginService } from 'app/login/login.service';
+import { TaskService } from 'app/task.service';
 declare var $: any;
 
 @Component({
@@ -9,35 +10,25 @@ declare var $: any;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  tasks: Array<Task> = [];
   assignedToTasks: Array<Task> = [];
   assignedByTasks: Array<Task> = [];
   currentUser: string;
 
-  constructor(public loginService: LoginService) {
-    if (!localStorage.getItem('tasks')) {
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
-    } else {
-      this.tasks = JSON.parse(localStorage.getItem('tasks'));
-    }
-    this.currentUser = loginService.getUser();
-    this.filterTasks();
+  constructor(public loginService: LoginService, private taskService: TaskService) {
+    this.currentUser = this.loginService.getUser();
   }
 
   ngOnInit() {
+    this.TaskByUser();
+    this.TaskToUser();
   }
 
-  filterTasks(): void {
-    if (localStorage.getItem('tasks')) {
-      for (const i of this.tasks) {
-        if (i.assignedTo.toLowerCase() === this.currentUser) {
-          this.assignedToTasks.push(i);
-        }
-        if (i.assignedBy.toLowerCase() === this.currentUser) {
-          this.assignedByTasks.push(i);
-        }
-      }
-    }
+  TaskByUser(): void {
+    this.taskService.TaskByUser(this.currentUser).subscribe(res => {this.assignedByTasks = res }, err => {console.log(err)});
+  }
+
+  TaskToUser(): void {
+    this.taskService.TaskToUser(this.currentUser).subscribe(res => {this.assignedToTasks = res }, err => {console.log(err)});
   }
 
   showModal(): boolean {

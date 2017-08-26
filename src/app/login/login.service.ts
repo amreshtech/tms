@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import { User } from 'app/users.model';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 @Injectable()
 export class LoginService {
-  login(user: string, password: string): boolean {
-    const isExist = this.doesExist(user);
-    if (isExist) {
-      const userDetail = this.getUserDetails(user);
-      if (user === userDetail.username && password === userDetail.password) {
-        localStorage.setItem('username', user);
-        return true;
-      }
-    }
-    return false;
+
+  constructor(private http: Http) {
+
+  }
+
+  login(user: string, password: string): Observable<Number> {
+    const url = 'http://localhost:8080/user/login';
+    const body = `{"username":"${user}","password":"${password}"}`;
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+    return this.http.post(url, body, options).map(res => res.status).catch(error => Observable.throw(new Error(error.status)));
   }
 
   logout(): any {
@@ -25,23 +30,5 @@ export class LoginService {
 
   isLoggedIn(): boolean {
     return this.getUser() !== null;
-  }
-
-  doesExist(user: string): boolean {
-    if (localStorage.getItem('users')) {
-      for (const i of JSON.parse(localStorage.getItem('users'))) {
-        if (i.username === user) {
-          return true;
-        }
-      }
-    } else { return false; }
-  }
-
-  getUserDetails(user: string): User {
-    for (const i of JSON.parse(localStorage.getItem('users'))) {
-      if (i.username === user) {
-        return i;
-      }
-    }
   }
 }

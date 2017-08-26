@@ -5,6 +5,8 @@ import { CalendarModule } from 'primeng/primeng';
 import * as moment from 'moment';
 import { Task } from 'app/tasks.model';
 import { LoginService } from 'app/login/login.service';
+import { TaskService } from 'app/task.service';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -23,8 +25,10 @@ export class CreateTaskComponent implements OnInit {
 
   @Input() tasks: Array<Task>;
   minDate: Date;
+  status: string;
+  done: boolean;
 
-  constructor(private fb: FormBuilder, loginService: LoginService) {
+  constructor(private fb: FormBuilder, private taskService: TaskService, private loginService: LoginService) {
     this.createTaskForm = fb.group({
       'name': ['', Validators.required],
       'createdDate': [''],
@@ -41,8 +45,10 @@ export class CreateTaskComponent implements OnInit {
     this.description = this.createTaskForm.controls['description'];
     this.deadline = this.createTaskForm.controls['deadline'];
     this.createdDate.setValue(moment());
-    this.assignedBy.setValue(loginService.getUser());
+    this.assignedBy.setValue({'username': loginService.getUser()});
     this.minDate = new Date();
+    this.status = 'open';
+    this.done = false;
   }
 
   ngOnInit() {
@@ -53,8 +59,10 @@ export class CreateTaskComponent implements OnInit {
     return false;
   }
   createTask(value: any): boolean {
-    this.tasks.push(value);
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    value.status = this.status;
+    value.done = this.done;
+    value.assignedTo = {'username': value.assignedTo};
+    this.taskService.createTask(value).subscribe(res => {alert('Task Created')}, err => {alert('Task alread exists')});
     this.createTaskForm.reset();
     return false;
   }

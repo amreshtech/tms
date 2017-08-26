@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { BackandService } from '@backand/angular2-sdk'
+import { Http, HttpModule, Response } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './signup/signup.component';
 import { SignupService } from 'app/signup/signup.service';
 import { LogoutComponent } from './logout/logout.component';
+import { TaskService } from 'app/task.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -45,9 +46,10 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CalendarModule,
+    HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [LoginService, LoggedInGuard, SignupService, BackandService],
+  providers: [LoginService, LoggedInGuard, SignupService, TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
