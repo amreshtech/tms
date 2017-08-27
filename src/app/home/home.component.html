@@ -4,11 +4,12 @@
             <h1 class="assignedToYou" *ngIf="assignedToTasks.length > 0">Assigned To You.</h1>
             <h1 class="assignedToYou" *ngIf="assignedToTasks.length == 0">No Task Assigned To You.</h1>
             <div class="ui link three cards">
-                <div class="card" *ngFor="let task of assignedToTasks">
+                <div class="card" *ngFor="let task of assignedToTasks | reverse">
                     <div class="content">
+                        <div class="right floated meta"><i class="fa fa-times"></i></div>
                         <div class="header">{{task.name | uppercase }}</div>
                         <div class="meta">
-                            Created On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedBy.username}}</b>
+                            On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedBy.username}}</b>
                         </div>
                         <div class="description">
                             {{task.description}}
@@ -18,8 +19,10 @@
                         <span class="right floated">
         Deadline: <b>{{task.deadline | date}}</b>
       </span> <span>
-        <i class="user icon"></i>
-        To: <b style="text-transform:capitalize">{{task.assignedTo.username}}</b>
+            <div class="ui checkbox">
+                    <input type="checkbox">
+                    <label></label>
+                  </div>
       </span>
                     </div>
                 </div>
@@ -36,11 +39,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" *ngFor="let task of assignedByTasks">
+                <div class="card" *ngFor="let task of assignedByTasks | reverse">
                     <div class="content">
+                        <div class="right floated meta"><i class="fa fa-times"></i></div>
                         <div class="header">{{task.name | uppercase }}</div>
                         <div class="meta">
-                            Created On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedBy.username}}</b>
+                            On: <a>{{task.createdDate | date}}</a>
                         </div>
                         <div class="description">
                             {{task.description}}
@@ -48,7 +52,7 @@
                     </div>
                     <div class="extra content">
                         <span class="right floated">Deadline: <b>{{task.deadline | date}}</b></span>
-                        <span><i class="user icon"></i>To: <b style="text-transform:capitalize">{{task.assignedTo.username}}</b></span>
+                        <span>To: <b style="text-transform:capitalize">{{task.assignedTo.username}}</b></span>
                     </div>
                 </div>
             </div>

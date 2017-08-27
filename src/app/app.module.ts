@@ -18,6 +18,8 @@ import { SignupComponent } from './signup/signup.component';
 import { SignupService } from 'app/signup/signup.service';
 import { LogoutComponent } from './logout/logout.component';
 import { TaskService } from 'app/task.service';
+import {NgPipesModule} from 'ngx-pipes';
+import { TaskCardComponent } from './task-card/task-card.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,7 +40,8 @@ const routes: Routes = [
     HomeComponent,
     CreateTaskComponent,
     SignupComponent,
-    LogoutComponent
+    LogoutComponent,
+    TaskCardComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     CalendarModule,
     HttpModule,
+    NgPipesModule,
     RouterModule.forRoot(routes)
   ],
   providers: [LoginService, LoggedInGuard, SignupService, TaskService],
