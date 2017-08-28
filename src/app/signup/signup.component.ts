@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/fo
 import { SignupService } from './signup.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'app/users.model';
+import { AuthService } from 'app/auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase/app';
 
 
 @Component({
@@ -16,8 +20,14 @@ export class SignupComponent implements OnInit {
   password: AbstractControl;
   message: string;
   returnUrl: string;
+  user: Observable<firebase.User>;
+  constructor(private fb: FormBuilder,
+    private signupService: SignupService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
+    public af: AngularFireAuth) {
 
-  constructor(private fb: FormBuilder, private signupService: SignupService, private route: ActivatedRoute, private router: Router) {
     this.signupForm = fb.group({
       'username': ['', Validators.required],
       'password': ['', [Validators.required, Validators.minLength(8)]]
@@ -25,17 +35,25 @@ export class SignupComponent implements OnInit {
 
     this.username = this.signupForm.controls['username'];
     this.password = this.signupForm.controls['password'];
-    this.message = '';
+    this.user = af.authState;
   }
 
   ngOnInit() {
   }
-
-  signup({ username, password }: { username: string, password: string }): boolean {
+  /* Traditional MySql signup*/
+  /* signup({ username, password }: { username: string, password: string }): boolean {
     this.signupService.signup(username, password).subscribe(res => {
       alert('You have been registered.Please login.');
     }, err => {alert('User already exists.Please login.'); });
     this.router.navigateByUrl('/login');
     return false;
+  } */
+
+  /* Firebase based SignUp */
+  signup({ username, password }: { username: string, password: string }) {
+    this.authService.signup(username, password)
+        .then( () => {this.router.navigateByUrl('/login'); })
+        .catch( err => {this.message = err.message + ' Please Login.'});
   }
+
 }

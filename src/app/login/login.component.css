@@ -43,3 +43,21 @@
     font-family: 'Montserrat', cursive, sans-serif;
     font-size: 1.2em;
 }
+
+.google {
+    height: 47px;
+    margin-left: -4px;
+}
+
+.or {
+    font-size: 28px;
+    color: white;
+    font-family: 'Comfortaa', cursive, sans-serif;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.btn-warning {
+    margin-top: 32px;
+}

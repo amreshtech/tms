@@ -3,6 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { Http, HttpModule, Response } from '@angular/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import {NgPipesModule} from 'ngx-pipes';
+import { CalendarModule } from 'primeng/primeng';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -12,14 +18,13 @@ import { HomeComponent } from './home/home.component';
 import { LoginService } from './login/login.service';
 import { LoggedInGuard } from 'app/logged-in.guard';
 import { CreateTaskComponent } from './create-task/create-task.component';
-import { CalendarModule } from 'primeng/primeng';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './signup/signup.component';
 import { SignupService } from 'app/signup/signup.service';
 import { LogoutComponent } from './logout/logout.component';
 import { TaskService } from 'app/task.service';
-import {NgPipesModule} from 'ngx-pipes';
-import { TaskCardComponent } from './task-card/task-card.component';
+import { AuthService } from 'app/auth.service';
+import { GoogleLoginComponent } from './google-login/google-login.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -27,9 +32,18 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: 'google', component: GoogleLoginComponent },
   { path: '**', redirectTo: 'home' }
 ]
 
+export const firebaseConfig = {
+  apiKey: 'AIzaSyDENbZKofOE9gmxNw42hrt4J0CFCSoz7aQ',
+  authDomain: 'tms-project-angular.firebaseapp.com',
+  databaseURL: 'https://tms-project-angular.firebaseio.com',
+  projectId: 'tms-project-angular',
+  storageBucket: 'tms-project-angular.appspot.com',
+  messagingSenderId: '852899847815'
+};
 
 @NgModule({
   declarations: [
@@ -41,7 +55,7 @@ const routes: Routes = [
     CreateTaskComponent,
     SignupComponent,
     LogoutComponent,
-    TaskCardComponent
+    GoogleLoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,9 +65,12 @@ const routes: Routes = [
     CalendarModule,
     HttpModule,
     NgPipesModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [LoginService, LoggedInGuard, SignupService, TaskService],
+  providers: [LoginService, LoggedInGuard, SignupService, TaskService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

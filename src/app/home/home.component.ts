@@ -3,6 +3,9 @@ import { Task } from 'app/tasks.model';
 import { LoginService } from 'app/login/login.service';
 import { TaskService } from 'app/task.service';
 declare var $: any;
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +17,11 @@ export class HomeComponent implements OnInit {
   assignedByTasks: Array<Task> = [];
   currentUser: string;
 
-  constructor(public loginService: LoginService, private taskService: TaskService) {
-    this.currentUser = this.loginService.getUser();
+  constructor(public loginService: LoginService,
+    private taskService: TaskService,
+    private af: AngularFireAuth) {
+    // this.currentUser = this.loginService.getUser();
+    this.af.authState.subscribe(authState => this.currentUser = authState.displayName.split(' ')[0]);
   }
 
   ngOnInit() {
