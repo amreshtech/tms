@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Http, HttpModule, Response } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import {NgPipesModule} from 'ngx-pipes';
 import { CalendarModule } from 'primeng/primeng';
@@ -70,7 +71,7 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [LoginService, LoggedInGuard, SignupService, TaskService, AuthService],
+  providers: [LoginService, LoggedInGuard, SignupService, TaskService, AuthService, AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

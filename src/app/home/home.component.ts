@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
     private af: AngularFireAuth) {
     // this.currentUser = this.loginService.getUser();
     this.af.authState.subscribe(authState => this.currentUser = authState.displayName.split(' ')[0]);
+    // this.taskService.getAllTasks().subscribe(res => console.log(res));
   }
 
   ngOnInit() {
@@ -30,11 +31,11 @@ export class HomeComponent implements OnInit {
   }
 
   TaskByUser(): void {
-    this.taskService.TaskByUser(this.currentUser).subscribe(res => {this.assignedByTasks = res }, err => {console.log(err)});
+    // this.taskService.TaskByUser(this.currentUser).subscribe(res => {this.assignedByTasks = res }, err => {console.log(err)});
   }
 
   TaskToUser(): void {
-    this.taskService.TaskToUser(this.currentUser).subscribe(res => {this.assignedToTasks = res }, err => {console.log(err)});
+    // this.taskService.TaskToUser(this.currentUser).subscribe(res => {this.assignedToTasks = res }, err => {console.log(err)});
   }
 
   showModal(): boolean {

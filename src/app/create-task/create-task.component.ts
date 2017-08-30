@@ -44,7 +44,7 @@ export class CreateTaskComponent implements OnInit {
     this.assignedTo = this.createTaskForm.controls['assignedTo'];
     this.description = this.createTaskForm.controls['description'];
     this.deadline = this.createTaskForm.controls['deadline'];
-    this.createdDate.setValue(moment());
+    this.createdDate.setValue(new Date());
     this.assignedBy.setValue({'username': loginService.getUser()});
     this.minDate = new Date();
     this.status = 'open';
@@ -62,8 +62,16 @@ export class CreateTaskComponent implements OnInit {
     value.status = this.status;
     value.done = this.done;
     value.assignedTo = {'username': value.assignedTo};
-    this.taskService.createTask(value).subscribe(res => {alert('Task Created')}, err => {alert('Task alread exists')});
+    this.taskService.createTask(value)/* .subscribe(res => {alert('Task Created')}, err => {alert('Task alread exists')}) */;
     this.createTaskForm.reset();
     return false;
   }
+
+  /* createTask(value: any): boolean {
+    value.status = this.status;
+    value.done = this.done;
+    value.assignedTo = {'username': value.assignedTo};
+    this.taskService.createTask(value)
+    return false;
+  } */
 }

@@ -3,7 +3,7 @@ import { LoginService } from 'app/login/login.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
-import { AuthService } from "app/auth.service";
+import { AuthService } from 'app/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +18,10 @@ export class HeaderComponent implements OnInit {
   constructor(loginService: LoginService, private af: AngularFireAuth, private authService: AuthService) {
     // this.currentUser = loginService.getUser();
     this.user = af.authState;
-    this.af.authState.subscribe(authState => this.currentUser = authState.displayName.split(' ')[0]);
+    this.af.authState.subscribe(authState => {
+      if (authState) {
+        this.currentUser = (authState.displayName != null) ? authState.displayName.split(' ')[0] : authState.email.split('@')[0]
+      }});
    }
 
   ngOnInit() {

@@ -1,7 +1,8 @@
 import { User } from './users.model';
 
 export class Task {
-    taskid: string;
+    // taskid: string;
+    $taskid: string;
     name: string;
     createdDate: Date;
     deadline: Date;
