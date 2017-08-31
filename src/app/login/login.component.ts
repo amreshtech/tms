@@ -8,6 +8,8 @@ import { AuthService } from 'app/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
+import { FirebaseListObservable } from "angularfire2/database";
+import { User } from "app/users.model";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
   message: string;
   returnUrl: string;
   user: Observable<firebase.User>;
-
+  users: FirebaseListObservable<User[]>;
   constructor(private fb: FormBuilder,
     public loginService: LoginService,
     private route: ActivatedRoute,

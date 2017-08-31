@@ -25,6 +25,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { TaskService } from 'app/task.service';
 import { AuthService } from 'app/auth.service';
 import { GoogleLoginComponent } from './google-login/google-login.component';
+import { UserService } from "app/user.service";
 
 
 const routes: Routes = [
@@ -71,7 +72,7 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [LoginService, LoggedInGuard, SignupService, TaskService, AuthService, AngularFireDatabase],
+  providers: [LoginService, LoggedInGuard, SignupService, TaskService, AuthService, AngularFireDatabase, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

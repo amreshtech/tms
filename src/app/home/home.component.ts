@@ -6,6 +6,9 @@ declare var $: any;
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
+import { UserService } from 'app/user.service';
+import { FirebaseListObservable } from 'angularfire2/database';
+import { User } from 'app/users.model';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +19,16 @@ export class HomeComponent implements OnInit {
   assignedToTasks: Array<Task> = [];
   assignedByTasks: Array<Task> = [];
   currentUser: string;
+  users: FirebaseListObservable<User[]>;
 
   constructor(public loginService: LoginService,
     private taskService: TaskService,
-    private af: AngularFireAuth) {
+    private af: AngularFireAuth,
+  private userService: UserService) {
     // this.currentUser = this.loginService.getUser();
-    this.af.authState.subscribe(authState => this.currentUser = authState.displayName.split(' ')[0]);
+    this.af.authState.subscribe(authState => {
+      this.currentUser = authState.displayName.split(' ')[0];
+      this.userService.addUserToFirebase(authState.uid, this.currentUser)});
     // this.taskService.getAllTasks().subscribe(res => console.log(res));
   }
 
@@ -42,4 +49,5 @@ export class HomeComponent implements OnInit {
     $('.ui.basic.modal').modal('show');
     return false;
   }
+
 }

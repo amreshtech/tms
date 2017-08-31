@@ -10,17 +10,14 @@ import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database
 export class TaskService implements OnInit {
 
     tasks: FirebaseListObservable<Task[]>;
-    private basePath = '/tasks';
-    task: FirebaseListObservable<Task>;
+    private taskPath = '/tasks';
     constructor(private http: Http, private db: AngularFireDatabase) {
     }
 
     /* Firebase REST API */
 
     getAllTasks(): FirebaseListObservable<Task[]> {
-        console.log(`get ${this.tasks}`);
-        this.tasks = this.db.list(this.basePath);
-        return this.tasks;
+        return this.db.list(this.taskPath);
     }
 
     createTask(task: Task): void {
