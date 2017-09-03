@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit {
   /* Firebase based SignUp */
   signup({ username, password }: { username: string, password: string }) {
     this.authService.signup(username, password)
-        .then( () => {this.router.navigateByUrl('/login'); })
+        .then( () => {this.router.navigateByUrl('/home'); })
         .catch( err => {this.message = err.message + ' Please Login.'});
   }
 

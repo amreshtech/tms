@@ -26,13 +26,13 @@ export class HomeComponent implements OnInit {
     private af: AngularFireAuth,
   private userService: UserService) {
     // this.currentUser = this.loginService.getUser();
-    this.af.authState.subscribe(authState => {
-      this.currentUser = authState.displayName.split(' ')[0];
-      this.userService.addUserToFirebase(authState.uid, this.currentUser)});
     // this.taskService.getAllTasks().subscribe(res => console.log(res));
   }
 
   ngOnInit() {
+    this.af.authState.subscribe(authState => {
+      this.currentUser = (authState.displayName != null) ? authState.displayName.split(' ')[0] : authState.email.split('@')[0];
+      this.userService.addUserToFirebase(authState.uid, this.currentUser)});
     this.TaskByUser();
     this.TaskToUser();
   }

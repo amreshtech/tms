@@ -7,8 +7,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import {NgPipesModule} from 'ngx-pipes';
+import { NgPipesModule } from 'ngx-pipes';
 import { CalendarModule } from 'primeng/primeng';
+import { AutoCompleteModule } from 'primeng/primeng';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -25,7 +26,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { TaskService } from 'app/task.service';
 import { AuthService } from 'app/auth.service';
 import { GoogleLoginComponent } from './google-login/google-login.component';
-import { UserService } from "app/user.service";
+import { UserService } from 'app/user.service';
 
 
 const routes: Routes = [
@@ -70,6 +71,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AutoCompleteModule,
     RouterModule.forRoot(routes)
   ],
   providers: [LoginService, LoggedInGuard, SignupService, TaskService, AuthService, AngularFireDatabase, UserService],

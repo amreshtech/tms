@@ -9,7 +9,7 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Enter your password" [formControl]="password" />
             <div *ngIf="password.hasError('minlength') && username.dirty" class="ui negative message">Password is less than 8 characters</div>
-            <div *ngIf="message" class="ui negative message">{{ message }}</div>
+            <div *ngIf="message && !password.valid" class="ui negative message">{{ message }}</div>
         </div>
         <button type="submit" class="btn btn-warning pull-right" [disabled]="!loginForm.valid">Login</button>
     </form>

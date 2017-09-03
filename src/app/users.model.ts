@@ -1,4 +1,4 @@
 export class User {
     displayName: string;
-    $uid: string;
+    uid: string;
 }

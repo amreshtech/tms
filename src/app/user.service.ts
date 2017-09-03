@@ -10,15 +10,24 @@ export class UserService {
     this.users = db.list('/users');
   }
 
-  getAll(): FirebaseListObservable<User[]> {
-    return this.db.list('/users');
+  addUserToFirebase(uid, displayName) {
+    const userList = this.db.object(`users/${uid}`);
+    const user: User = { 'displayName': '', 'uid': '' };
+    user.displayName = this.capitalizeFirstLetter(displayName);
+    user.uid = uid;
+    userList.subscribe(data => {
+      if (!data.$exists()) {
+        this.db.object(`/users/${uid}`).set(user);
+      }
+    });
   }
 
-  addUserToFirebase(uid, displayName) {
-    this.getAll();
-    const user: User = { 'displayName': '', '$uid': '' };
-    user.displayName = displayName;
-    user.$uid = uid;
-    this.users.push(user);
+  getAllUsers() {
+    return this.users;
   }
+
+capitalizeFirstLetter(string) {
+    return string[0].toUpperCase() + string.slice(1);
+}
+
 }

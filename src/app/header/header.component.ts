@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     this.user = af.authState;
     this.af.authState.subscribe(authState => {
       if (authState) {
-        this.currentUser = (authState.displayName != null) ? authState.displayName.split(' ')[0] : authState.email.split('@')[0]
+        this.currentUser = (authState.displayName != null) ? authState.displayName.split(' ')[0] : authState.email.split('@')[0];
       }});
    }
 

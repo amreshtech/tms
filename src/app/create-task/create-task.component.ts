@@ -7,7 +7,8 @@ import { Task } from 'app/tasks.model';
 import { LoginService } from 'app/login/login.service';
 import { TaskService } from 'app/task.service';
 import { Observable } from 'rxjs/Observable';
-
+import { UserService } from 'app/user.service';
+declare var $: any;
 
 @Component({
   selector: 'app-create-task',
@@ -27,8 +28,12 @@ export class CreateTaskComponent implements OnInit {
   minDate: Date;
   status: string;
   done: boolean;
+ 
 
-  constructor(private fb: FormBuilder, private taskService: TaskService, private loginService: LoginService) {
+  constructor(private fb: FormBuilder,
+     private taskService: TaskService,
+     private loginService: LoginService,
+     private userService: UserService) {
     this.createTaskForm = fb.group({
       'name': ['', Validators.required],
       'createdDate': [''],
@@ -49,6 +54,15 @@ export class CreateTaskComponent implements OnInit {
     this.minDate = new Date();
     this.status = 'open';
     this.done = false;
+    this.userService.getAllUsers()
+    .subscribe(userList => {
+      $('.ui.search')
+      .search({
+        source: userList.map(data => {
+          return {title: data.displayName}
+        })
+      });
+    });
   }
 
   ngOnInit() {
