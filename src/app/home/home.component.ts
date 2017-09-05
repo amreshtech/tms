@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   assignedToTasks: Array<Task> = [];
   assignedByTasks: Array<Task> = [];
   currentUser: string;
+  uid: string;
   users: FirebaseListObservable<User[]>;
 
   constructor(public loginService: LoginService,
@@ -32,17 +33,21 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.af.authState.subscribe(authState => {
       this.currentUser = (authState.displayName != null) ? authState.displayName.split(' ')[0] : authState.email.split('@')[0];
-      this.userService.addUserToFirebase(authState.uid, this.currentUser)});
+      this.userService.addUserToFirebase(authState.uid, this.currentUser);
+      this.uid = authState.uid});
     this.TaskByUser();
     this.TaskToUser();
   }
 
   TaskByUser(): void {
     // this.taskService.TaskByUser(this.currentUser).subscribe(res => {this.assignedByTasks = res }, err => {console.log(err)});
+    this.taskService.TasksByUser(this.uid).subscribe(res => {this.assignedByTasks = res; console.log(this.assignedByTasks); },
+     err => {console.log(err)});
   }
 
   TaskToUser(): void {
     // this.taskService.TaskToUser(this.currentUser).subscribe(res => {this.assignedToTasks = res }, err => {console.log(err)});
+    this.taskService.TasksToUser(this.uid).subscribe(res => {this.assignedToTasks = res }, err => {console.log(err)});
   }
 
   showModal(): boolean {

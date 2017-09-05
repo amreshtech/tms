@@ -9,7 +9,7 @@
                         <div class="right floated meta"><i class="fa fa-times"></i></div>
                         <div class="header">{{task.name | uppercase }}</div>
                         <div class="meta">
-                            On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedBy.username}}</b>
+                            On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedByName}}</b>
                         </div>
                         <div class="description">
                             {{task.description}}
@@ -52,7 +52,7 @@
                     </div>
                     <div class="extra content">
                         <span class="right floated">Deadline: <b>{{task.deadline | date}}</b></span>
-                        <span>To: <b style="text-transform:capitalize">{{task.assignedTo.username}}</b></span>
+                        <span>To: <b style="text-transform:capitalize">{{task.assignedToName}}</b></span>
                     </div>
                 </div>
             </div>

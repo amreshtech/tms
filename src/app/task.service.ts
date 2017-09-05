@@ -12,7 +12,14 @@ export class TaskService implements OnInit {
     tasks: FirebaseListObservable<Task[]>;
     private taskPath = '/tasks';
     constructor(private http: Http, private db: AngularFireDatabase) {
+        this.tasks = db.list('/tasks');
     }
+
+    private handleError(error) {
+        console.log(error)
+    }
+
+    ngOnInit(): void {}
 
     /* Firebase REST API */
 
@@ -21,17 +28,27 @@ export class TaskService implements OnInit {
     }
 
     createTask(task: Task): void {
-        this.getAllTasks();
-        console.log(this.tasks);
-        console.log(task);
         this.tasks.push(task).catch(err => this.handleError(err));
     }
 
-    private handleError(error) {
-        console.log(error)
+    TasksByUser(uid): FirebaseListObservable<Task[]> {
+        const userList = this.db.list(this.taskPath, {
+            query: {
+                orderByChild: 'assingnedBy',
+                equalTo: uid
+            }
+        });
+        return userList;
     }
 
-    ngOnInit(): void {
+    TasksToUser(uid): FirebaseListObservable<Task[]> {
+        const userList = this.db.list(this.taskPath, {
+            query: {
+                orderByChild: 'assingnedTo',
+                equalTo: uid
+            }
+        });
+        return userList;
     }
     /* Traditional MySQL REST API */
     /* createTask(task: any): Observable<Number> {
@@ -41,7 +58,7 @@ export class TaskService implements OnInit {
         return this.http.post(url, task, options).map(res => res.status).catch(err => Observable.throw(new Error(err.status)));
     }*/
 
-    TaskByUser(user): Observable<Task[]> {
+    /* TaskByUser(user): Observable<Task[]> {
         const url = 'http://localhost:8080/task/by/' + user;
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options = new RequestOptions({ headers: headers });
@@ -51,9 +68,11 @@ export class TaskService implements OnInit {
         .map(res => res.json())
         .catch(err => Observable.throw(new Error(err.status)));
         // return this.http.get(url, options).map(res => res.json()).catch(err => Observable.throw(new Error(err.status)));
-    }
+    } */
 
-    TaskToUser(user): Observable<Task[]> {
+
+
+    /* TaskToUser(user): Observable<Task[]> {
         const url = 'http://localhost:8080/task/to/' + user;
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options = new RequestOptions({ headers: headers });
@@ -63,5 +82,5 @@ export class TaskService implements OnInit {
         .map(res => res.json())
         .catch(err => Observable.throw(new Error(err.status)));
         // return this.http.get(url, options).map(res => res.json()).catch(err => Observable.throw(new Error(err.status)));
-    }
+    } */
 }

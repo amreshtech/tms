@@ -4,6 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { LoginService } from './login/login.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class LoggedInGuard implements CanActivate {

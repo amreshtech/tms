@@ -23,17 +23,20 @@ export class CreateTaskComponent implements OnInit {
   assignedTo: AbstractControl;
   description: AbstractControl;
   deadline: AbstractControl;
+  tempAssignedTo: any;
+  tempAssignedByName: string;
+  tempAssignedToName: string;
 
   @Input() tasks: Array<Task>;
   minDate: Date;
   status: string;
   done: boolean;
- 
 
   constructor(private fb: FormBuilder,
-     private taskService: TaskService,
-     private loginService: LoginService,
-     private userService: UserService) {
+    private taskService: TaskService,
+    private loginService: LoginService,
+    private userService: UserService,
+  ) {
     this.createTaskForm = fb.group({
       'name': ['', Validators.required],
       'createdDate': [''],
@@ -50,19 +53,26 @@ export class CreateTaskComponent implements OnInit {
     this.description = this.createTaskForm.controls['description'];
     this.deadline = this.createTaskForm.controls['deadline'];
     this.createdDate.setValue(new Date());
-    this.assignedBy.setValue({'username': loginService.getUser()});
     this.minDate = new Date();
     this.status = 'open';
     this.done = false;
-    this.userService.getAllUsers()
-    .subscribe(userList => {
-      $('.ui.search')
-      .search({
-        source: userList.map(data => {
-          return {title: data.displayName}
-        })
+
+    this.userService.getCurrentUserDetails()
+      .subscribe(authState => {
+        this.assignedBy.setValue(authState.uid);
+        this.tempAssignedByName = (authState.displayName != null) ? authState.displayName.split(' ')[0] : authState.email.split('@')[0];
       });
-    });
+
+    this.userService.getAllUsers()
+      .subscribe(userList => {
+        $('.ui.search')
+          .search({
+            source: userList.map(data => {
+              return { title: data.displayName, uid: data.uid }
+            }),
+            onSelect: (res => {this.tempAssignedTo = res.uid; this.tempAssignedToName = res.title})
+          });
+      });
   }
 
   ngOnInit() {
@@ -75,8 +85,13 @@ export class CreateTaskComponent implements OnInit {
   createTask(value: any): boolean {
     value.status = this.status;
     value.done = this.done;
-    value.assignedTo = {'username': value.assignedTo};
-    this.taskService.createTask(value)/* .subscribe(res => {alert('Task Created')}, err => {alert('Task alread exists')}) */;
+    value.assignedToName = this.tempAssignedToName;
+    value.assignedByName = this.tempAssignedByName;
+    value.assignedTo = this.tempAssignedTo;
+    value.createdDate = value.createdDate.toString();
+    value.deadline = value.deadline.toString();
+    console.log(value);
+    this.taskService.createTask(value) /*.subscribe(res => {alert('Task Created')}, err => {alert('Task alread exists')});*/
     this.createTaskForm.reset();
     return false;
   }

@@ -2,13 +2,14 @@ import { User } from './users.model';
 
 export class Task {
     // taskid: string;
-    $taskid: string;
     name: string;
-    createdDate: Date;
-    deadline: Date;
+    createdDate: string;
+    deadline: string;
     description: string;
     status: string;
-    assignedBy: User;
-    assignedTo: User;
+    assignedBy: string;
+    assignedByName: string;
+    assignedToName: string;
+    assignedTo: string;
     done: boolean;
 }
