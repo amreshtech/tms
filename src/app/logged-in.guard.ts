@@ -7,6 +7,7 @@ import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/do';
+import { AuthService } from 'app/auth.service';
 
 @Injectable()
 export class LoggedInGuard implements CanActivate {
@@ -14,7 +15,8 @@ export class LoggedInGuard implements CanActivate {
 
   constructor(private loginService: LoginService,
     private router: Router,
-    private af: AngularFireAuth) {}
+    private af: AngularFireAuth,
+    private authService: AuthService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -29,6 +31,7 @@ export class LoggedInGuard implements CanActivate {
       return false; */
 
       /* Firebase AuthGuard */
+
       return this.af.authState
       .take(1)
       .map(authState => !!authState)

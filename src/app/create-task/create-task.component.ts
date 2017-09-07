@@ -90,7 +90,6 @@ export class CreateTaskComponent implements OnInit {
     value.assignedTo = this.tempAssignedTo;
     value.createdDate = value.createdDate.toString();
     value.deadline = value.deadline.toString();
-    console.log(value);
     this.taskService.createTask(value) /*.subscribe(res => {alert('Task Created')}, err => {alert('Task alread exists')});*/
     this.createTaskForm.reset();
     return false;

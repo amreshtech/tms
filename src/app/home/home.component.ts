@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   currentUser: string;
   uid: string;
   users: FirebaseListObservable<User[]>;
+  // isDone: boolean;
 
   constructor(public loginService: LoginService,
     private taskService: TaskService,
@@ -28,26 +29,36 @@ export class HomeComponent implements OnInit {
   private userService: UserService) {
     // this.currentUser = this.loginService.getUser();
     // this.taskService.getAllTasks().subscribe(res => console.log(res));
+
+    // this.isDone = true;
   }
 
   ngOnInit() {
     this.af.authState.subscribe(authState => {
       this.currentUser = (authState.displayName != null) ? authState.displayName.split(' ')[0] : authState.email.split('@')[0];
       this.userService.addUserToFirebase(authState.uid, this.currentUser);
-      this.uid = authState.uid});
-    this.TaskByUser();
-    this.TaskToUser();
+      this.uid = authState.uid;
+      this.TaskByUser(this.uid);
+      this.TaskToUser(this.uid);
+    });
   }
 
-  TaskByUser(): void {
+  TaskByUser(uid): void {
     // this.taskService.TaskByUser(this.currentUser).subscribe(res => {this.assignedByTasks = res }, err => {console.log(err)});
-    this.taskService.TasksByUser(this.uid).subscribe(res => {this.assignedByTasks = res; console.log(this.assignedByTasks); },
-     err => {console.log(err)});
+    this.taskService.TasksByUser(uid).subscribe(res => this.assignedByTasks = res, err => console.log(err));
   }
 
-  TaskToUser(): void {
+  TaskToUser(uid): void {
     // this.taskService.TaskToUser(this.currentUser).subscribe(res => {this.assignedToTasks = res }, err => {console.log(err)});
-    this.taskService.TasksToUser(this.uid).subscribe(res => {this.assignedToTasks = res }, err => {console.log(err)});
+    this.taskService.TasksToUser(uid).subscribe(res => this.assignedToTasks = res, err => console.log(err));
+  }
+
+  deleteTask(task) {
+    this.taskService.deleteTask(task);
+  }
+
+  closeTask(task) {
+    this.taskService.closeTask(task);
   }
 
   showModal(): boolean {

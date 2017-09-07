@@ -4,10 +4,11 @@
             <h1 class="assignedToYou" *ngIf="assignedToTasks.length > 0">Assigned To You.</h1>
             <h1 class="assignedToYou" *ngIf="assignedToTasks.length == 0">No Task Assigned To You.</h1>
             <div class="ui link three cards">
-                <div class="card" *ngFor="let task of assignedToTasks | reverse">
+                <div class="card" *ngFor="let task of assignedToTasks | reverse | open">
                     <div class="content">
-                        <div class="right floated meta"><i class="fa fa-times"></i></div>
-                        <div class="header">{{task.name | uppercase }}</div>
+                        <div class="header">{{task.name | uppercase }}
+                            <div class="right floated meta"><i class="fa fa-times" (click)="deleteTask(this.task)"></i></div>
+                        </div>
                         <div class="meta">
                             On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedByName}}</b>
                         </div>
@@ -18,11 +19,8 @@
                     <div class="extra content">
                         <span class="right floated">
         Deadline: <b>{{task.deadline | date}}</b>
-      </span> <span>
-            <div class="ui checkbox">
-                    <input type="checkbox">
-                    <label></label>
-                  </div>
+      </span> <span class="left floated">
+        <p-checkbox [(ngModel)]="task[done]" binary="true" (onChange)="closeTask(this.task)"></p-checkbox>
       </span>
                     </div>
                 </div>
@@ -39,9 +37,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" *ngFor="let task of assignedByTasks | reverse">
+                <div class="card" *ngFor="let task of assignedByTasks | reverse | open">
                     <div class="content">
-                        <div class="right floated meta"><i class="fa fa-times"></i></div>
+                        <div class="right floated meta"><i class="fa fa-times" (click)="deleteTask(this.task)"></i></div>
                         <div class="header">{{task.name | uppercase }}</div>
                         <div class="meta">
                             On: <a>{{task.createdDate | date}}</a>

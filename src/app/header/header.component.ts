@@ -4,7 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
 import { AuthService } from 'app/auth.service';
-import { UserService } from "app/user.service";
+import { UserService } from 'app/user.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +13,7 @@ import { UserService } from "app/user.service";
 })
 export class HeaderComponent implements OnInit {
   menuItems: Array<String> = [];
-  currentUser: string;
+  currentUser: string = null;
   user: Observable<firebase.User>
 
   constructor(loginService: LoginService,

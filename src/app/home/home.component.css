@@ -19,3 +19,11 @@
     font-size: 19px;
     color: #e83810;
 }
+
+.open {
+    background-color: rgb(230, 183, 49)!important;
+}
+
+.closed {
+    background-color: rgb(230, 183, 49)!important;
+}

@@ -27,6 +27,8 @@ import { TaskService } from 'app/task.service';
 import { AuthService } from 'app/auth.service';
 import { GoogleLoginComponent } from './google-login/google-login.component';
 import { UserService } from 'app/user.service';
+import {CheckboxModule} from 'primeng/primeng';
+import { OpenPipe } from './open.pipe';
 
 
 const routes: Routes = [
@@ -59,6 +61,7 @@ export const firebaseConfig = {
     SignupComponent,
     LogoutComponent,
     GoogleLoginComponent,
+    OpenPipe,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AutoCompleteModule,
+    CheckboxModule,
     RouterModule.forRoot(routes)
   ],
   providers: [LoginService, LoggedInGuard, SignupService, TaskService, AuthService, AngularFireDatabase, UserService],

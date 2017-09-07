@@ -34,7 +34,7 @@ export class TaskService implements OnInit {
     TasksByUser(uid): FirebaseListObservable<Task[]> {
         const userList = this.db.list(this.taskPath, {
             query: {
-                orderByChild: 'assingnedBy',
+                orderByChild: 'assignedBy',
                 equalTo: uid
             }
         });
@@ -44,12 +44,22 @@ export class TaskService implements OnInit {
     TasksToUser(uid): FirebaseListObservable<Task[]> {
         const userList = this.db.list(this.taskPath, {
             query: {
-                orderByChild: 'assingnedTo',
+                orderByChild: 'assignedTo',
                 equalTo: uid
             }
         });
         return userList;
     }
+
+    closeTask(task) {
+            this.db.object(`${this.taskPath}/${task.$key}`).update({status: 'closed', done: 'true'});
+    }
+
+    deleteTask(task) {
+        this.db.object(`${this.taskPath}/${task.$key}`).remove();
+    }
+
+
     /* Traditional MySQL REST API */
     /* createTask(task: any): Observable<Number> {
         const url = 'http://localhost:8080/task/save';

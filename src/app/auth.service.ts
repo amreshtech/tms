@@ -23,4 +23,8 @@ export class AuthService {
   logout() {
     this.af.auth.signOut();
   }
+
+  isLoggedIn() {
+    return this.af.authState;
+  }
 }

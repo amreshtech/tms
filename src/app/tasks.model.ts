@@ -11,5 +11,5 @@ export class Task {
     assignedByName: string;
     assignedToName: string;
     assignedTo: string;
-    done: boolean;
+    done: Boolean;
 }
