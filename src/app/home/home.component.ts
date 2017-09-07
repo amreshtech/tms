@@ -61,6 +61,14 @@ export class HomeComponent implements OnInit {
     this.taskService.closeTask(task);
   }
 
+  getOpenAssignedToTask() {
+    return this.assignedToTasks.some(res => res.status === 'open');
+  }
+
+  getOpenAssignedByTask() {
+    return this.assignedByTasks.some(res => res.status === 'open');
+  }
+
   showModal(): boolean {
     $('.ui.basic.modal').modal('show');
     return false;

@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
-            <h1 class="assignedToYou" *ngIf="assignedToTasks.length > 0">Assigned To You.</h1>
-            <h1 class="assignedToYou" *ngIf="assignedToTasks.length == 0">No Task Assigned To You.</h1>
+            <h1 class="assignedToYou" *ngIf="getOpenAssignedToTask()">Assigned to you.</h1>
+            <h1 class="assignedToYou" *ngIf="!getOpenAssignedToTask()">No task assigned to you.</h1>
             <div class="ui link three cards">
                 <div class="card" *ngFor="let task of assignedToTasks | reverse | open">
                     <div class="content">
@@ -27,8 +27,8 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h1 class="assignedToYou" *ngIf="assignedByTasks.length > 0">Assigned By You.</h1>
-            <h1 class="assignedToYou" *ngIf="assignedByTasks.length == 0">Assign a new task.</h1>
+            <h1 class="assignedToYou" *ngIf="getOpenAssignedByTask()">Assigned by you.</h1>
+            <h1 class="assignedToYou" *ngIf="!getOpenAssignedByTask()">Assign new task.</h1>
             <div class="ui link two cards">
                 <div class="card" (click)="showModal();">
                     <div class="content">
