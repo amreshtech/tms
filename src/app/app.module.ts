@@ -29,6 +29,10 @@ import { GoogleLoginComponent } from './google-login/google-login.component';
 import { UserService } from 'app/user.service';
 import {CheckboxModule} from 'primeng/primeng';
 import { OpenPipe } from './open.pipe';
+import { AllTaskAssignedToYouComponent } from './all-task-assigned-to-you/all-task-assigned-to-you.component';
+import { AllTaskAssignedByYouComponent } from './all-task-assigned-by-you/all-task-assigned-by-you.component';
+import { AllTasksComponent } from './all-tasks/all-tasks.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 
 const routes: Routes = [
@@ -62,6 +66,10 @@ export const firebaseConfig = {
     LogoutComponent,
     GoogleLoginComponent,
     OpenPipe,
+    AllTaskAssignedToYouComponent,
+    AllTaskAssignedByYouComponent,
+    AllTasksComponent,
+    TaskDetailsComponent,
   ],
   imports: [
     BrowserModule,

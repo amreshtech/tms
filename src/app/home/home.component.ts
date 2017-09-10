@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   currentUser: string;
   uid: string;
   users: FirebaseListObservable<User[]>;
+  tasks: Array<Task>;
+  taskid: string;
   // isDone: boolean;
 
   constructor(public loginService: LoginService,
@@ -69,8 +71,15 @@ export class HomeComponent implements OnInit {
     return this.assignedByTasks.some(res => res.status === 'open');
   }
 
+
   showModal(): boolean {
-    $('.ui.basic.modal').modal('show');
+    $('#createTask').modal('show');
+    return false;
+  }
+
+  showTaskDetails(taskid): boolean {
+    this.taskid = taskid;
+    $('#showTask').modal('show');
     return false;
   }
 

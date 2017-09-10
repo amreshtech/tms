@@ -23,6 +23,10 @@ export class TaskService implements OnInit {
 
     /* Firebase REST API */
 
+    getTask(taskid) {
+        return this.db.object(`${this.taskPath}/${taskid}`);
+    }
+
     getAllTasks(): FirebaseListObservable<Task[]> {
         return this.db.list(this.taskPath);
     }

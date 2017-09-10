@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <form [formGroup]="taskDetailsForm">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                <div class="form-group">
+                    <label for="name">Task Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter the Task Name" [formControl]="name">
+                </div>
+                <div class="form-group">
+                    <label for="createdDate">Created On</label>
+                    <p-calendar [minDate]="minDate" id="createdDate" [formControl]="createdDate" [style]="{'width':'100%'}" inputStyleClass="form-control" [showIcon]="false"></p-calendar>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" [formControl]="assignedBy" hidden>
+                </div>
+                <div class="form-group">
+                    <label for="assignedTo">Assigned To</label>
+                    <div class="ui search">
+                        <div class="ui icon input" style="width: 100%">
+                            <input type="text" class="form-control prompt" id="assignedTo" placeholder="Whom you want to assign to ?" [formControl]="assignedTo" style="border-radius: 4px !important;">
+                            <i class="search icon"></i>
+                        </div>
+                        <div class="results"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                <div class="form-group">
+                    <label for="description">Task Description</label>
+                    <input type="text" class="form-control" id="description" placeholder="Enter the Task Description " [formControl]="description">
+                </div>
+                <div class="form-group">
+                    <label for="deadline">Complete By</label>
+                    <p-calendar [minDate]="minDate" id="deadlineDate" [formControl]="deadline" [style]="{'width':'100%'}" inputStyleClass="form-control" [showIcon]="false" placeholder="Enter deadline"></p-calendar>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="ui red basic cancel inverted button pull-right" (click)="clearForm()">
+              <i class="remove icon"></i> Cancel
+          </button>
+            <button class="ui green ok inverted button pull-right" name="editButton" type="submit" ngModel="[(editButton)]" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+          <i class="checkmark icon"></i>{{ editButton }}
+      </button>
+        </div>
+    </form>
+</div>
