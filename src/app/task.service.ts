@@ -63,6 +63,11 @@ export class TaskService implements OnInit {
         this.db.object(`${this.taskPath}/${task.$key}`).remove();
     }
 
+    updateTask(task) {
+        console.log(task);
+        this.db.object(`${this.taskPath}/${task.$key}`).update(task);
+    }
+
 
     /* Traditional MySQL REST API */
     /* createTask(task: any): Observable<Number> {

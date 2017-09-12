@@ -33,6 +33,7 @@ import { AllTaskAssignedToYouComponent } from './all-task-assigned-to-you/all-ta
 import { AllTaskAssignedByYouComponent } from './all-task-assigned-by-you/all-task-assigned-by-you.component';
 import { AllTasksComponent } from './all-tasks/all-tasks.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import {DropdownModule} from 'primeng/primeng';
 
 
 const routes: Routes = [
@@ -83,6 +84,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     CheckboxModule,
+    DropdownModule,
     RouterModule.forRoot(routes)
   ],
   providers: [LoginService, LoggedInGuard, SignupService, TaskService, AuthService, AngularFireDatabase, UserService],

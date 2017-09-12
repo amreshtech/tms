@@ -5,7 +5,7 @@
             <h1 class="assignedToYou" *ngIf="!getOpenAssignedToTask()">No task assigned to you.</h1>
             <div class="ui link three cards">
                 <div class="card" *ngFor="let task of assignedToTasks | slice:0:10 | reverse | open">
-                    <div class="content" (click)="showTaskDetails(this.task.$key)">
+                    <div class="content" (click)="showTaskDetails(this.task)">
                         <div class="header">{{task.name | uppercase }}
                             <div class="right floated meta"><i class="fa fa-times" (click)="deleteTask(this.task)"></i></div>
                         </div>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="card" *ngFor="let task of assignedByTasks | slice:0:5 | reverse | open">
-                    <div class="content" (click)="showTaskDetails(this.task.$key)">
+                    <div class="content" (click)="showTaskDetails(this.task)">
                         <div class="right floated meta"><i class="fa fa-times" (click)="deleteTask(this.task)"></i></div>
                         <div class="header">{{task.name | uppercase }}</div>
                         <div class="meta">
@@ -72,6 +72,6 @@
             Task Details
         </div>
         <div class="content">
-            <app-task-details [taskid]="taskid"></app-task-details>
+            <app-task-details [task]="task"></app-task-details>
         </div>
     </div>

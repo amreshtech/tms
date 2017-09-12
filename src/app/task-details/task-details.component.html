@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <form [formGroup]="taskDetailsForm">
+    <form [formGroup]="taskDetailsForm" (ngSubmit)="updateTask(taskDetailsForm.value)">
         <div class="row">
             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
                 <div class="form-group">
@@ -11,9 +11,6 @@
                     <p-calendar [minDate]="minDate" id="createdDate" [formControl]="createdDate" [style]="{'width':'100%'}" inputStyleClass="form-control" [showIcon]="false"></p-calendar>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" [formControl]="assignedBy" hidden>
-                </div>
-                <div class="form-group">
                     <label for="assignedTo">Assigned To</label>
                     <div class="ui search">
                         <div class="ui icon input" style="width: 100%">
@@ -22,6 +19,10 @@
                         </div>
                         <div class="results"></div>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <p-dropdown [options]="statusArray" [formControl]="status" id="status" [style]="{'width':'100%'}" inputStyleClass="form-control"></p-dropdown>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
@@ -33,15 +34,18 @@
                     <label for="deadline">Complete By</label>
                     <p-calendar [minDate]="minDate" id="deadlineDate" [formControl]="deadline" [style]="{'width':'100%'}" inputStyleClass="form-control" [showIcon]="false" placeholder="Enter deadline"></p-calendar>
                 </div>
+                <div class="form-group">
+                    <p-checkbox [formControl]="isDone" binary="true" label="Is task done ?" inputStyleClass="form-control" (click)="changeStatus()"></p-checkbox>
+                </div>
             </div>
         </div>
         <div class="actions">
-            <button class="ui red basic cancel inverted button pull-right" (click)="clearForm()">
-              <i class="remove icon"></i> Cancel
-          </button>
-            <button class="ui green ok inverted button pull-right" name="editButton" type="submit" ngModel="[(editButton)]" [ngModelOptions]="{standalone: true}" ngDefaultControl>
-          <i class="checkmark icon"></i>{{ editButton }}
-      </button>
+            <button class="ui green ok inverted button pull-right" name="updateButton" type="submit" *ngIf="!isDisabled" [disabled]="!taskDetailsForm.valid">
+            <i class="checkmark icon"></i>Update
+        </button>
+            <button class="ui green ok inverted button pull-right" name="editButton" type="button" (click)="editTask()" *ngIf="isDisabled">
+                <i class="checkmark icon"></i>Edit
+            </button>
         </div>
     </form>
 </div>

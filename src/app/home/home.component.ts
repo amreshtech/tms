@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   uid: string;
   users: FirebaseListObservable<User[]>;
   tasks: Array<Task>;
-  taskid: string;
+  task: Task;
   // isDone: boolean;
 
   constructor(public loginService: LoginService,
@@ -77,8 +77,8 @@ export class HomeComponent implements OnInit {
     return false;
   }
 
-  showTaskDetails(taskid): boolean {
-    this.taskid = taskid;
+  showTaskDetails(task): boolean {
+    this.task = task;
     $('#showTask').modal('show');
     return false;
   }
