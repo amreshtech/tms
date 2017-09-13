@@ -64,7 +64,6 @@ export class TaskService implements OnInit {
     }
 
     updateTask(task) {
-        console.log(task);
         this.db.object(`${this.taskPath}/${task.$key}`).update(task);
     }
 

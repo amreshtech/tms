@@ -25,7 +25,6 @@ import { SignupService } from 'app/signup/signup.service';
 import { LogoutComponent } from './logout/logout.component';
 import { TaskService } from 'app/task.service';
 import { AuthService } from 'app/auth.service';
-import { GoogleLoginComponent } from './google-login/google-login.component';
 import { UserService } from 'app/user.service';
 import {CheckboxModule} from 'primeng/primeng';
 import { OpenPipe } from './open.pipe';
@@ -42,7 +41,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'logout', component: LogoutComponent },
-  { path: 'google', component: GoogleLoginComponent },
   { path: '**', redirectTo: 'home' }
 ]
 
@@ -65,7 +63,6 @@ export const firebaseConfig = {
     CreateTaskComponent,
     SignupComponent,
     LogoutComponent,
-    GoogleLoginComponent,
     OpenPipe,
     AllTaskAssignedToYouComponent,
     AllTaskAssignedByYouComponent,

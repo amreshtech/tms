@@ -1,0 +1,13 @@
+.footer {
+    font-family: 'Comfortaa', cursive, sans-serif;
+    color: white;
+    font-size: 1.2em;
+    bottom: 2px;
+    left: 33em;
+    margin: auto;
+    position: absolute;
+}
+
+.fa-heart {
+    color: red;
+}

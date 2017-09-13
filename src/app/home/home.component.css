@@ -27,3 +27,15 @@
 .closed {
     background-color: rgb(230, 183, 49)!important;
 }
+
+.more-button2 {
+    font-family: 'Montserrat', cursive, sans-serif;
+    color: white;
+    margin-top: 31px;
+}
+
+.more-button1 {
+    font-family: 'Montserrat', cursive, sans-serif;
+    color: white;
+    margin-top: -34px;
+}
