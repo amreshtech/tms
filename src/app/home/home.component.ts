@@ -23,16 +23,11 @@ export class HomeComponent implements OnInit {
   users: FirebaseListObservable<User[]>;
   tasks: Array<Task>;
   task: Task;
-  // isDone: boolean;
 
   constructor(public loginService: LoginService,
     private taskService: TaskService,
     private af: AngularFireAuth,
   private userService: UserService) {
-    // this.currentUser = this.loginService.getUser();
-    // this.taskService.getAllTasks().subscribe(res => console.log(res));
-
-    // this.isDone = true;
   }
 
   ngOnInit() {
@@ -47,12 +42,16 @@ export class HomeComponent implements OnInit {
 
   TaskByUser(uid): void {
     // this.taskService.TaskByUser(this.currentUser).subscribe(res => {this.assignedByTasks = res }, err => {console.log(err)});
-    this.taskService.TasksByUser(uid).subscribe(res => this.assignedByTasks = res, err => console.log(err));
+    this.taskService.TasksByUser(uid).subscribe(res => this.assignedByTasks = this.OpenTask(res), err => console.log(err));
   }
 
   TaskToUser(uid): void {
     // this.taskService.TaskToUser(this.currentUser).subscribe(res => {this.assignedToTasks = res }, err => {console.log(err)});
-    this.taskService.TasksToUser(uid).subscribe(res => this.assignedToTasks = res, err => console.log(err));
+    this.taskService.TasksToUser(uid).subscribe(res => this.assignedToTasks = this.OpenTask(res), err => console.log(err));
+  }
+
+  OpenTask(res) {
+    return res.filter((x) => x.status === 'open' );
   }
 
   deleteTask(task) {

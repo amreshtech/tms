@@ -31,11 +31,15 @@
 .more-button2 {
     font-family: 'Montserrat', cursive, sans-serif;
     color: white;
-    margin-top: 31px;
+    top: 34.2em;
+    position: absolute;
+    right: 0.8em;
 }
 
 .more-button1 {
     font-family: 'Montserrat', cursive, sans-serif;
     color: white;
-    margin-top: -34px;
+    position: absolute;
+    right: 0.8em;
+    top: 34.2em;
 }

@@ -18,8 +18,8 @@ declare var $: any;
 export class CreateTaskComponent implements OnInit {
   createTaskForm: FormGroup;
   name: AbstractControl;
-  createdDate: AbstractControl;
-  assignedBy: AbstractControl;
+  createdDate: string;
+  assignedBy: string;
   assignedTo: AbstractControl;
   description: AbstractControl;
   deadline: AbstractControl;
@@ -39,27 +39,23 @@ export class CreateTaskComponent implements OnInit {
   ) {
     this.createTaskForm = fb.group({
       'name': ['', Validators.required],
-      'createdDate': [''],
-      'assignedBy': ['', Validators.required],
       'assignedTo': ['', Validators.required],
       'description': ['', Validators.required],
       'deadline': ['', Validators.required]
     });
 
     this.name = this.createTaskForm.controls['name'];
-    this.createdDate = this.createTaskForm.controls['createdDate'];
-    this.assignedBy = this.createTaskForm.controls['assignedBy'];
     this.assignedTo = this.createTaskForm.controls['assignedTo'];
     this.description = this.createTaskForm.controls['description'];
     this.deadline = this.createTaskForm.controls['deadline'];
-    this.createdDate.setValue(new Date());
+    this.createdDate = (new Date()).toString();
     this.minDate = new Date();
     this.status = 'open';
     this.done = false;
 
     this.userService.getCurrentUserDetails()
       .subscribe(authState => {
-        this.assignedBy.setValue(authState.uid);
+        this.assignedBy = authState.uid;
         this.tempAssignedByName = (authState.displayName != null) ? authState.displayName.split(' ')[0] : authState.email.split('@')[0];
       });
 
@@ -88,9 +84,9 @@ export class CreateTaskComponent implements OnInit {
     value.assignedToName = this.tempAssignedToName;
     value.assignedByName = this.tempAssignedByName;
     value.assignedTo = this.tempAssignedTo;
-    value.createdDate = value.createdDate.toString();
+    value.createdDate = this.createdDate;
+    value.assignedBy = this.assignedBy;
     value.deadline = value.deadline.toString();
-    console.log(this.createdDate);
     this.taskService.createTask(value) /*.subscribe(res => {alert('Task Created')}, err => {alert('Task alread exists')});*/
     this.createTaskForm.reset();
     return false;

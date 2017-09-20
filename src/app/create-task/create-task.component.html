@@ -7,12 +7,6 @@
                     <input type="text" class="form-control" id="name" placeholder="Enter the Task Name" [formControl]="name">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" [formControl]="createdDate" hidden>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" [formControl]="assignedBy" hidden>
-                </div>
-                <div class="form-group">
                     <label for="assignedTo">Assigned To</label>
                     <div class="ui search">
                         <div class="ui icon input" style="width: 100%">
@@ -38,7 +32,7 @@
             <button class="ui red basic cancel inverted button pull-right" (click)="clearForm()">
                 <i class="remove icon"></i> Cancel
             </button>
-            <button class="ui green ok inverted button pull-right" type="submit">
+            <button class="ui green ok inverted button pull-right" type="submit" [disabled]="!createTaskForm.valid">
             <i class="checkmark icon"></i> Create
         </button>
         </div>

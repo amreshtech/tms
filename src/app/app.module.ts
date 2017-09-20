@@ -27,12 +27,12 @@ import { TaskService } from 'app/task.service';
 import { AuthService } from 'app/auth.service';
 import { UserService } from 'app/user.service';
 import {CheckboxModule} from 'primeng/primeng';
-import { OpenPipe } from './open.pipe';
 import { AllTaskAssignedToYouComponent } from './all-task-assigned-to-you/all-task-assigned-to-you.component';
 import { AllTaskAssignedByYouComponent } from './all-task-assigned-by-you/all-task-assigned-by-you.component';
 import { AllTasksComponent } from './all-tasks/all-tasks.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import {DropdownModule} from 'primeng/primeng';
+import { ShortenPipe } from './shorten.pipe';
 
 
 const routes: Routes = [
@@ -63,11 +63,11 @@ export const firebaseConfig = {
     CreateTaskComponent,
     SignupComponent,
     LogoutComponent,
-    OpenPipe,
     AllTaskAssignedToYouComponent,
     AllTaskAssignedByYouComponent,
     AllTasksComponent,
     TaskDetailsComponent,
+    ShortenPipe,
   ],
   imports: [
     BrowserModule,

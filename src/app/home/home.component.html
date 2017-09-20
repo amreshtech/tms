@@ -4,16 +4,15 @@
             <h1 class="assignedToYou" *ngIf="getOpenAssignedToTask()">Assigned to you.</h1>
             <h1 class="assignedToYou" *ngIf="!getOpenAssignedToTask()">No task assigned to you.</h1>
             <div class="ui link three cards">
-                <div class="card" *ngFor="let task of assignedToTasks | open | slice:0:8 | reverse">
+                <div class="card" *ngFor="let task of assignedToTasks | reverse | slice:0:8">
                     <div class="content" (click)="showTaskDetails(this.task)">
-                        <div class="header">{{task.name | uppercase }}
-                            <div class="right floated meta"><i class="fa fa-times" (click)="deleteTask(this.task)"></i></div>
+                        <div class="header">{{task.name | uppercase | shorten: 'toname' }}
                         </div>
                         <div class="meta">
                             On: <a>{{task.createdDate | date}}</a> by <b style="text-transform:capitalize">{{task.assignedByName}}</b>
                         </div>
                         <div class="description">
-                            {{task.description}}
+                            {{task.description | shorten: 'todesc' }}
                         </div>
                     </div>
                     <div class="extra content">
@@ -25,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div><a class="ui white inverted button pull-right more-button1">SEE MORE</a></div>
+            <div><a class="ui white inverted button pull-right more-button1" *ngIf="assignedToTasks.length > 8">SEE MORE</a></div>
         </div>
         <div class="col-md-4">
             <h1 class="assignedToYou" *ngIf="getOpenAssignedByTask()">Assigned by you.</h1>
@@ -38,23 +37,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" *ngFor="let x = index; let task of assignedByTasks | open | slice:0:3 | reverse">
+                <div class="card" *ngFor="let task of assignedByTasks | reverse | slice:0:3">
                     <div class="content" (click)="showTaskDetails(this.task)">
                         <div class="right floated meta"><i class="fa fa-times" (click)="deleteTask(this.task)"></i></div>
-                        <div class="header">{{task.name | uppercase }}</div>
+                        <div class="header">{{task.name | uppercase | shorten: 'byname' }}</div>
                         <div class="meta">
                             On: <a>{{task.createdDate | date}}</a>
                         </div>
                         <div class="description">
-                            {{task.description}}
+                            {{task.description | shorten: 'bydesc' }}
                         </div>
                     </div>
                     <div class="extra content">
                         <span class="right floated">Deadline: <b>{{task.deadline | date}}</b></span>
                         <span>To: <b style="text-transform:capitalize">{{task.assignedToName}}</b></span>
                     </div>
-                    <div><a class="ui white inverted button pull-right more-button2" *ngIf="x === 2">SEE MORE</a></div>
                 </div>
+                <div><a class="ui white inverted button pull-right more-button2" *ngIf="assignedByTasks.length > 3">SEE MORE</a></div>
             </div>
         </div>
     </div>
